@@ -1,0 +1,133 @@
+/* EmojiPicker component styling */
+.emoji-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.emoji-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 2px solid transparent;
+  background-color: #f3f4f6;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100px;
+  height: 100px;
+}
+
+.emoji-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.emoji-button.selected {
+  border-color: #6366f1;
+  background-color: #ede9fe;
+}
+
+.emoji-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.emoji-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+/* Happy mood */
+.emoji-button.Happy {
+  background-color: rgba(74, 222, 128, 0.1);
+}
+.emoji-button.Happy:hover,
+.emoji-button.Happy.selected {
+  background-color: rgba(74, 222, 128, 0.2);
+  border-color: #4ade80;
+}
+
+/* Neutral mood */
+.emoji-button.Neutral {
+  background-color: rgba(250, 204, 21, 0.1);
+}
+.emoji-button.Neutral:hover,
+.emoji-button.Neutral.selected {
+  background-color: rgba(250, 204, 21, 0.2);
+  border-color: #facc15;
+}
+
+/* Sad mood */
+.emoji-button.Sad {
+  background-color: rgba(96, 165, 250, 0.1);
+}
+.emoji-button.Sad:hover,
+.emoji-button.Sad.selected {
+  background-color: rgba(96, 165, 250, 0.2);
+  border-color: #60a5fa;
+}
+
+/* Angry mood */
+.emoji-button.Angry {
+  background-color: rgba(248, 113, 113, 0.1);
+}
+.emoji-button.Angry:hover,
+.emoji-button.Angry.selected {
+  background-color: rgba(248, 113, 113, 0.2);
+  border-color: #f87171;
+}
+
+/* Animation for selection */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.emoji-button.selected .emoji-icon {
+  animation: pulse 0.5s ease-in-out;
+}
+
+/* Responsive styles */
+@media (max-width: 640px) {
+  .emoji-picker {
+    gap: 0.5rem;
+  }
+  
+  .emoji-button {
+    width: 80px;
+    height: 80px;
+    padding: 0.75rem;
+  }
+  
+  .emoji-icon {
+    font-size: 2rem;
+  }
+  
+  .emoji-label {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .emoji-button {
+    width: 70px;
+    height: 70px;
+    padding: 0.5rem;
+  }
+  
+  .emoji-icon {
+    font-size: 1.75rem;
+  }
+}
