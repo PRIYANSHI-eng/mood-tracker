@@ -3,6 +3,7 @@ import EmojiPicker from "../components/EmojiPicker";
 import MoodCalendar from "../components/MoodCalendar";
 import MoodStats from "../components/MoodStats";
 import MoodInsights from "../components/MoodInsights";
+import LoadingSpinner from "../components/LoadingSpinner";
 import { saveMood, getMoods } from "../utils/storage";
 import { moods } from "../constants/mood";
 import "../styles/MoodTracker.css";
@@ -12,17 +13,26 @@ export default function MoodTracker() {
   const [moodHistory, setMoodHistory] = useState({});
   const [todayMood, setTodayMood] = useState(null);
   const [activeTab, setActiveTab] = useState("today"); // "today", "calendar", "stats", "insights"
+  const [isLoading, setIsLoading] = useState(true);
+  const [saveSuccess, setSaveSuccess] = useState(false);
   
   useEffect(() => {
-    const allMoods = getMoods();
-    setMoodHistory(allMoods);
+    // Simulate loading data
+    setIsLoading(true);
     
-    // Check if user already logged mood today
-    const today = new Date().toISOString().slice(0, 10);
-    if (allMoods[today]) {
-      setTodayMood(allMoods[today]);
-      setSelectedMood(allMoods[today]);
-    }
+    setTimeout(() => {
+      const allMoods = getMoods();
+      setMoodHistory(allMoods);
+      
+      // Check if user already logged mood today
+      const today = new Date().toISOString().slice(0, 10);
+      if (allMoods[today]) {
+        setTodayMood(allMoods[today]);
+        setSelectedMood(allMoods[today]);
+      }
+      
+      setIsLoading(false);
+    }, 800); // Simulate network delay
   }, []);
 
   function handleSelectMood(label) {
@@ -36,6 +46,12 @@ export default function MoodTracker() {
       ...prev,
       [today]: label
     }));
+    
+    // Show success message
+    setSaveSuccess(true);
+    setTimeout(() => {
+      setSaveSuccess(false);
+    }, 2000);
   }
 
   // Get mood emoji by label
@@ -62,6 +78,10 @@ export default function MoodTracker() {
 
   // Render the active tab content
   const renderTabContent = () => {
+    if (isLoading) {
+      return <LoadingSpinner />;
+    }
+    
     switch (activeTab) {
       case "today":
         return (
@@ -79,6 +99,13 @@ export default function MoodTracker() {
             )}
             
             <EmojiPicker selectedMood={selectedMood} onSelectMood={handleSelectMood} />
+            
+            {saveSuccess && (
+              <div className="save-success">
+                <div className="success-icon">✓</div>
+                <p>Your mood has been saved!</p>
+              </div>
+            )}
             
             <div className="mood-recent">
               <h2 className="mood-recent-title">Your Recent Moods</h2>
@@ -117,26 +144,34 @@ export default function MoodTracker() {
         <button 
           className={`mood-tab ${activeTab === "today" ? "active" : ""}`}
           onClick={() => setActiveTab("today")}
+          aria-label="Today's mood"
         >
-          Today
+          <span className="tab-icon">📅</span>
+          <span className="tab-text">Today</span>
         </button>
         <button 
           className={`mood-tab ${activeTab === "calendar" ? "active" : ""}`}
           onClick={() => setActiveTab("calendar")}
+          aria-label="Calendar view"
         >
-          Calendar
+          <span className="tab-icon">🗓️</span>
+          <span className="tab-text">Calendar</span>
         </button>
         <button 
           className={`mood-tab ${activeTab === "stats" ? "active" : ""}`}
           onClick={() => setActiveTab("stats")}
+          aria-label="Statistics view"
         >
-          Statistics
+          <span className="tab-icon">📊</span>
+          <span className="tab-text">Statistics</span>
         </button>
         <button 
           className={`mood-tab ${activeTab === "insights" ? "active" : ""}`}
           onClick={() => setActiveTab("insights")}
+          aria-label="Insights view"
         >
-          Insights
+          <span className="tab-icon">💡</span>
+          <span className="tab-text">Insights</span>
         </button>
       </div>
       

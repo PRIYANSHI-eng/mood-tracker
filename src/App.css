@@ -3,6 +3,8 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: #333;
   background-color: #f9fafb;
+  margin: 0;
+  padding: 0;
 }
 
 #root {
@@ -11,6 +13,95 @@ body {
   flex-direction: column;
 }
 
+/* App container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-main {
+  flex: 1;
+  padding-bottom: 2rem;
+}
+
+/* Loading screen */
+.app-loading-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7ff 0%, #e9f0ff 100%);
+  padding: 2rem;
+}
+
+.loading-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 1.5rem 0 0.5rem;
+  background: linear-gradient(to right, #8b5cf6, #6366f1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.loading-subtitle {
+  font-size: 1.125rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Footer */
+.app-footer {
+  background-color: #f3f4f6;
+  padding: 3rem 1rem;
+  margin-top: auto;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #4338ca;
+  margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  color: #6b7280;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #4338ca;
+}
+
+.footer-copyright {
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+/* Container */
 .container {
   width: 100%;
   max-width: 1280px;
@@ -84,4 +175,36 @@ body {
   background: linear-gradient(to right, #7c3aed, #4f46e5);
   transform: translateY(-2px);
   box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.4);
+}
+
+/* Accessibility */
+:focus {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .loading-title {
+    font-size: 2rem;
+  }
+  
+  .loading-subtitle {
+    font-size: 1rem;
+  }
+  
+  .footer-links {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-footer {
+    padding: 2rem 1rem;
+  }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 }

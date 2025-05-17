@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../styles/Navbar.css";
+import logoImage from "../assets/MoodLogo2.png";
 
 export default function Navbar() {
   const location = useLocation();
@@ -14,8 +15,9 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
-          <Link to="/" className="navbar-logo-text">
-            MoodTracker
+          <Link to="/" className="navbar-logo-link">
+            <img src={logoImage} alt="MoodTracker Logo" className="navbar-logo-image" />
+            <span className="navbar-logo-text">MoodTracker</span>
           </Link>
         </div>
         
